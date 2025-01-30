@@ -5,6 +5,14 @@ from transformers import GPT2Config, AdamW
 from transformers import get_scheduler
 from tqdm.auto import tqdm
 from torch.utils.data import DataLoader
+import os
+
+def save_model(model_output_dir, model, epoch):
+    path = os.path.join(model_output_dir, 'model_epoch{}'.format(epoch + 1))
+    if not os.path.exists(path):
+        os.makedirs(path)
+    model_to_save = model.module if hasattr(model, 'module') else model
+    model_to_save.save_pretrained(path)
 
 
 def main():
@@ -18,7 +26,7 @@ def main():
     model.to(device)
     model.train()
 
-    train_loader = DataLoader(train_dset, batch_size=2, shuffle=True)
+    train_loader = DataLoader(train_dset, batch_size=8, shuffle=True)
     optim = AdamW(model.parameters(), lr=1e-5)
 
     num_epochs = 20
@@ -43,7 +51,7 @@ def main():
             pbar.update(1)
             pbar.set_description(f"train_loss: {loss.item():.5f}")
 
-    model.save_pretrained("model_ckpts/")
+        save_model("c:/Gitee/model/ch7/math/", model, epoch)
 
 
 if __name__ == "__main__":

@@ -73,7 +73,9 @@ def main():
             overall_step += 1
 
         save_model("c:/Gitee/model/ch7/math/", model, epoch)
+
     tb_writer.close()
+
 
 if __name__ == "__main__":
     main()

@@ -7,7 +7,8 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel
 def main():
     device = th.device("cuda")
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    model = GPT2LMHeadModel.from_pretrained("model_ckpts")
+    model = GPT2LMHeadModel.from_pretrained("C:/Gitee/model/ch7/math/model_epoch15")
+    #model = GPT2LMHeadModel.from_pretrained("gpt2")
     model.to(device)
     print("Model Loaded")
 

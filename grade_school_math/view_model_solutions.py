@@ -7,7 +7,9 @@ def read_jsonl(path: str):
         return [json.loads(line) for line in fh.readlines() if line]
 
 def main():
-    path = os.path.join("data/example_model_solutions.jsonl")
+    current_path = os.path.abspath(__file__)
+    current_dir = os.path.dirname(current_path)
+    path = os.path.join(current_dir, "data/example_model_solutions.jsonl")
     qa_objs = read_jsonl(path)
 
     for qa_obj in qa_objs:

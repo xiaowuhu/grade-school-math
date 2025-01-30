@@ -5,7 +5,7 @@ from transformers import GPT2Config, AdamW
 from transformers import get_scheduler
 from tqdm.auto import tqdm
 from torch.utils.data import DataLoader
-import datetime
+from datetime import datetime
 import os
 from torch.utils.tensorboard import SummaryWriter
 
@@ -35,14 +35,13 @@ def main():
     num_epochs = 50
     num_training_steps = num_epochs * len(train_loader)
     lr_scheduler = get_scheduler(
-        "linear",
-        optimizer=optim,
-        num_warmup_steps=0,
-        num_training_steps=num_training_steps,
+        name="cosine", 
+        optimizer=optim, 
+        num_warmup_steps=50, 
+        num_training_steps=num_epochs * len(train_loader)
     )
 
     tb_writer = SummaryWriter(log_dir="tensorboard_summary/")   
-    now = datetime.now()
 
     running_loss = 0
     overall_step = 0 # 整体的迭代计数器

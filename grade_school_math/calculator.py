@@ -17,10 +17,10 @@ def timeout(duration, formula):
 
 def eval_with_timeout(formula, max_time=3):
     try:
-        with timeout(max_time, formula):
-            return eval(formula)
+        #with timeout(max_time, formula):
+        return eval(formula)
     except Exception as e:
-        signal.alarm(0)
+        signal.raise_signal(0)
         print(f"Warning: Failed to eval {formula}, exception: {e}")
         return None
 
